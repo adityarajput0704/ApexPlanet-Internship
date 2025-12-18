@@ -61,10 +61,13 @@ Based on non-null counts, the following missing values were identified:
 
 ## 1.5 Logical Consistency
 -> Potential business rule validations:
+    
     Total Spent should equal Price Per Unit × Quantity
+    
     Transactions with missing Price Per Unit or Quantity may result in incorrect Total Spent.
 
 -> Findings:
+    
     Dataset contains of 1213 rows where Total Spent is not equal to Price Per Unit × Quantity
 
 <br>
@@ -85,13 +88,13 @@ The objective of this step is to clean and prepare the dataset by addressing the
 
 Code:
 #####  Remove rows with missing critical numeric values
-df = df.dropna(subset=['Price Per Unit', 'Quantity'])
+    df = df.dropna(subset=['Price Per Unit', 'Quantity'])
 
  ##### Fill missing discount values with 'No'
-df['Discount Applied'] = df['Discount Applied'].fillna(False)
+    df['Discount Applied'] = df['Discount Applied'].fillna(False)
 
  ##### Remove rows with missing item names
-df = df.dropna(subset=['Item'])
+    df = df.dropna(subset=['Item'])
 
 ## 2.2 Data Type Conversion
 -> Actions Taken:
@@ -102,10 +105,10 @@ df = df.dropna(subset=['Item'])
 
 Code:
  #####  ~ Convert Transaction Date to datetime
-df['Transaction Date'] = pd.to_datetime(df['Transaction Date'], errors='coerce')
+    df['Transaction Date'] = pd.to_datetime(df['Transaction Date'], errors='coerce')
 
 ######  Convert Quantity to integer
-df['Quantity'] = df['Quantity'].astype(int)
+    df['Quantity'] = df['Quantity'].astype(int)
 
 ## 2.3 Standardizing Categorical Values
 -> Actions Taken:
@@ -120,6 +123,7 @@ df['Quantity'] = df['Quantity'].astype(int)
 
     for col in categorical_cols:
         df[col] = df[col].astype(str).str.strip().str.title()`
+    
     
     df['Discount Applied']=df['Discount Applied'].replace({'True':'Yes' , 'False':'No'})
 
